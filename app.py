@@ -113,7 +113,7 @@ def delete_daytime():
     c = conn.cursor()
 
     # 今日のデータを抽出する
-    c.execute("DELETE FROM hospital WHERE date = date('now') AND night_time IS NULL")
+    c.execute("DELETE FROM hospital WHERE date = date('now') AND type <> '指定なし'")
 
     # データベースを更新
     conn.commit()
