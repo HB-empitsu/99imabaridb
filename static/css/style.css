@@ -1,0 +1,124 @@
+/* ヘッダー */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  padding: 0 10%;
+  background-color: #006bb3;
+}
+#logo {
+  width: 80px; /* Adjust as needed */
+  height: auto;
+}
+.app-title {
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 80px;
+  margin-bottom: 20px;
+}
+.link-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* メニューを中央に配置 */
+  gap: 30px; /* 各メニューリンクの間に空間を追加 */
+}
+.menu-link {
+  padding: 10px 20px;
+  color: #ffffff;
+  text-decoration: none;
+  display: flex; /* Added for vertical alignment */
+  align-items: center; /* Added for vertical alignment */
+  justify-content: center; /* Added for horizontal alignment */
+  background-color: #006bb3;
+  border-radius: 20px;
+  transition: opacity 0.3s ease;
+}
+/* list.html */
+
+.page-head {
+  margin-top: 60px;
+  color: #b33c09;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+}
+
+.page-subhead {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  color: #006bb3;
+  font-size: 20px;
+  text-align: center;
+}
+
+.list-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 90px;
+}
+.card-wrap {
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.card {
+  width: 100%;
+  padding: 30px;
+  margin-bottom: 30px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  box-shadow: 0px 1px 6px #cccccc;
+}
+.card a {
+  color: #006bb3;
+  word-wrap: break-word;
+}
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333333;
+}
+.subtitle {
+  margin-bottom: 15px;
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: #006bb3;
+  border: 2px solid #006bb3;
+  border-radius: 3px;
+  transition: 0.4s;
+}
+
+.goto-button {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  display: inline-block;
+  padding: 0.3em 1em;
+  text-decoration: none;
+  color: white; /* 色を白に変更 */
+  background: #006bb3; /* 背景色を追加 */
+  border: 2px solid #006bb3;
+  border-radius: 3px;
+  transition: 0.4s;
+}
+
+.icon-wrap {
+  display: flex;
+  column-gap: 12px;
+  justify-content: end;
+}
+
+.green {
+  color: #339999;
+}
+
+body {
+  font-size: 14px;
+  line-height: 1.8;
+}

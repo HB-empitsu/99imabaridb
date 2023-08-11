@@ -1,0 +1,69 @@
+{% extends "base.html" %} {% block content %}
+
+<main>
+  <h2 class="page-head">お知らせ</h2>
+
+  <div class="list-container">
+    <div class="card-wrap">
+      <h3 class="page-subhead">電話相談</h3>
+
+      <div class="card">
+        <p class="subtitle">子ども</p>
+        <p class="title">子ども医療電話相談（＃8000）</p>
+        <p>
+          夜間に突然、子どもさんの身体の具合が悪くなった時「どうしよう…」と困ったことはないですか。<br />看護師や医師などが家庭での応急対処の方法などについてアドバイスしますので、小児救急医療電話相談（＃8000）をご利用ください。
+        </p>
+        <br/ >
+        <p>短縮ダイヤル　#8000</p>
+        <p>ダイヤル回線　089-913-2777</p>
+        <br/ >
+        <p>平日：19:00～翌朝08:00</p>
+        <p>土曜：13:00～翌朝08:00</p>
+        <p>日・祝：08:00～翌朝08:00</p>
+        <br />
+        <p>
+          <a href="https://www.city.imabari.ehime.jp/kenkou/hoken25.html"
+            >https://www.city.imabari.ehime.jp/kenkou/hoken25.html</a
+          >
+        </p>
+      </div>
+
+      <div class="card">
+        <p class="subtitle">大人</p>
+        <p class="title">えひめ救急電話相談（＃7119）</p>
+        <img
+          src="{{ url_for('static', filename='img/7119_img.jpg') }}"
+          alt=""
+        />
+        <p>
+          もし、急な「病気」や「ケガ」で救急車を呼ぶか？病院へ行くか？の判断に迷ったときは、えひめ救急電話相談（＃7119）をご利用ください。
+        </p>
+        <br />
+        <p>短縮ダイヤル　#7119</p>
+        <p>ダイヤル回線　089-909-9935</p>
+        <br />
+        <p>（365日24時間対応）</p>
+        <br />
+        <p>
+          <a href="https://www.city.imabari.ehime.jp/shoubou/kyukyu/handan.html"
+            >https://www.city.imabari.ehime.jp/shoubou/kyukyu/handan.html</a
+          >
+        </p>
+      </div>
+
+      <h3 class="page-subhead">ホームページ</h3>
+
+      <div class="card">
+        <p class="subtitle">子ども</p>
+        <p class="title">子供の救急ホームページ</p>
+        <p>
+          休日・夜間に生後１ヶ月～６歳までの子どもさんが身体の具合が悪くなり、病院を受診するか判断の目安を提供するためのウェブサイトです。
+        </p>
+        <br />
+        <p><a href="https://kodomo-qq.jp/">https://kodomo-qq.jp/</a></p>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

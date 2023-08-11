@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+
+<main>
+  <h2 class="page-head green">今月の当番医</h2>
+  {% for date, posts in posts_by_hosp.items() %}
+  <h3 class="page-subhead">{{ date }}</h3>
+  <div class="list-container">
+    <div class="card-wrap">
+      {% for post in posts %}
+      <div class="card">
+        <p class="subtitle">{{ post["type"] }}</p>
+        <p class="title">{{ post["name"] }}</p>
+        <p>{{ post["time"] }}</p>
+        <p>{{ post["address"] }}</p>
+        <p>TEL 📞<a href='tel:{{ post["tel"] }}'>{{ post["tel"] }}</a></p>
+        <div class="icon-wrap">
+          <a href='{{ post["navi"] }}'>
+            <button class="goto-button">ルート案内</button>
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</main>
+
+{% endblock %}
