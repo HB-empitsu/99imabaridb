@@ -40,7 +40,7 @@ def today_get():
 
     # 今日のデータを抽出する
     c.execute(
-        "SELECT DISTINCT date, week, date_week FROM hospital WHERE date <= date('now') ORDER BY date ASC"
+        "SELECT DISTINCT date, week, date_week FROM hospital WHERE date <= date('now', 'localtime') ORDER BY date ASC"
     )
 
     dates = c.fetchall()
@@ -98,7 +98,7 @@ def delete_yesterday():
     c = conn.cursor()
 
     # 今日のデータを抽出する
-    c.execute("DELETE FROM hospital WHERE date < date('now')")
+    c.execute("DELETE FROM hospital WHERE date < date('now', 'localtime')")
 
     # データベースを更新
     conn.commit()
@@ -113,7 +113,9 @@ def delete_daytime():
     c = conn.cursor()
 
     # 今日のデータを抽出する
-    c.execute("DELETE FROM hospital WHERE date = date('now') AND type <> '指定なし'")
+    c.execute(
+        "DELETE FROM hospital WHERE date = date('now', 'localtime') AND type <> '指定なし'"
+    )
 
     # データベースを更新
     conn.commit()
