@@ -1,6 +1,8 @@
 # flaskモジュールからFlaskクラスをインポート
 from flask import Flask, render_template, redirect
 
+import datetime
+
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 
@@ -81,7 +83,8 @@ def month_get():
 
 @app.route("/info")
 def link_get():
-    return render_template("info.html")
+    dt_now = datetime.datetime.now()
+    return render_template("info.html", post_date=f"{dt_now:%Y%m}")
 
 
 @app.errorhandler(404)
