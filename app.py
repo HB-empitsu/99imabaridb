@@ -3,6 +3,7 @@ from flask import Flask, render_template, redirect
 
 import datetime
 
+# スケジュール実行
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
 
@@ -35,12 +36,13 @@ col_name = [
 app = Flask(__name__)
 
 
+# 今日を表示
 @app.route("/")
 def today_get():
     conn = sqlite3.connect(DATABASE_FILE)
     c = conn.cursor()
 
-    # 今日のデータを抽出する
+    # 今日までのデータを抽出する
     c.execute(
         "SELECT DISTINCT date, week, date_week FROM hospital WHERE date <= date('now', 'localtime') ORDER BY date ASC"
     )
@@ -59,12 +61,13 @@ def today_get():
     return render_template("index.html", posts_by_hosp=posts_by_hosp)
 
 
+# 今月を表示
 @app.route("/list")
 def month_get():
     conn = sqlite3.connect(DATABASE_FILE)
     c = conn.cursor()
 
-    # 今日のデータを抽出する
+    # 全データを抽出する
     c.execute("SELECT DISTINCT date, week, date_week FROM hospital ORDER BY date ASC")
 
     dates = c.fetchall()
@@ -81,12 +84,15 @@ def month_get():
     return render_template("list.html", posts_by_hosp=posts_by_hosp)
 
 
+# お知らせを表示
 @app.route("/info")
 def link_get():
+    # 広報いまばりのURL生成のために年月を作成
     dt_now = datetime.datetime.now()
     return render_template("info.html", post_date=f"{dt_now:%Y%m}")
 
 
+# 404エラーは今日へ移動
 @app.errorhandler(404)
 def page_not_found(error):
     return redirect("/")
@@ -95,12 +101,13 @@ def page_not_found(error):
 # スケジュール削除
 
 
+# 前日を削除
 def delete_yesterday():
     # データベース準備
     conn = sqlite3.connect(DATABASE_FILE)
     c = conn.cursor()
 
-    # 今日のデータを抽出する
+    # 前日のデータを削除
     c.execute("DELETE FROM hospital WHERE date < date('now', 'localtime')")
 
     # データベースを更新
@@ -110,12 +117,13 @@ def delete_yesterday():
     c.close()
 
 
+# 今日の指定なし以外（内科・小児科・島しょ部）を削除
 def delete_daytime():
     # データベース準備
     conn = sqlite3.connect(DATABASE_FILE)
     c = conn.cursor()
 
-    # 今日のデータを抽出する
+    # 今日の指定なし以外を削除
     c.execute(
         "DELETE FROM hospital WHERE date = date('now', 'localtime') AND type <> '指定なし'"
     )
@@ -126,6 +134,10 @@ def delete_daytime():
     # データベースの接続を終了
     c.close()
 
+
+# 初回起動時に上記データベース削除を実行する
+delete_yesterday()
+delete_daytime()
 
 # スクリプトとして直接実行した場合
 if __name__ == "__main__":
