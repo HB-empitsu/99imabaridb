@@ -103,36 +103,46 @@ def page_not_found(error):
 
 # 前日を削除
 def delete_yesterday():
-    # データベース準備
-    conn = sqlite3.connect(DATABASE_FILE)
-    c = conn.cursor()
+    # 現在の時刻を取得
+    dt_time = datetime.datetime.now().time()
+    time_to_0900 = datetime.datetime.strptime("09:00", "%H:%M").time()
 
-    # 前日のデータを削除
-    c.execute("DELETE FROM hospital WHERE date < date('now', 'localtime')")
+    if dt_time >= time_to_0900:
+        # データベース準備
+        conn = sqlite3.connect(DATABASE_FILE)
+        c = conn.cursor()
 
-    # データベースを更新
-    conn.commit()
+        # 前日のデータを削除
+        c.execute("DELETE FROM hospital WHERE date < date('now', 'localtime')")
 
-    # データベースの接続を終了
-    c.close()
+        # データベースを更新
+        conn.commit()
+
+        # データベースの接続を終了
+        c.close()
 
 
 # 今日の指定なし以外（内科・小児科・島しょ部）を削除
 def delete_daytime():
-    # データベース準備
-    conn = sqlite3.connect(DATABASE_FILE)
-    c = conn.cursor()
+    # 現在の時刻を取得
+    dt_time = datetime.datetime.now().time()
+    time_to_1800 = datetime.datetime.strptime("18:00", "%H:%M").time()
 
-    # 今日の指定なし以外を削除
-    c.execute(
-        "DELETE FROM hospital WHERE date = date('now', 'localtime') AND type <> '指定なし'"
-    )
+    if dt_time >= time_to_1800:
+        # データベース準備
+        conn = sqlite3.connect(DATABASE_FILE)
+        c = conn.cursor()
 
-    # データベースを更新
-    conn.commit()
+        # 今日の指定なし以外を削除
+        c.execute(
+            "DELETE FROM hospital WHERE date = date('now', 'localtime') AND type <> '指定なし'"
+        )
 
-    # データベースの接続を終了
-    c.close()
+        # データベースを更新
+        conn.commit()
+
+        # データベースの接続を終了
+        c.close()
 
 
 # 初回起動時に上記データベース削除を実行する
