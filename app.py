@@ -105,9 +105,9 @@ def page_not_found(error):
 def delete_yesterday():
     # 現在の時刻を取得
     dt_time = datetime.datetime.now().time()
-    time_to_0900 = datetime.datetime.strptime("09:00", "%H:%M").time()
+    time_to_0830 = datetime.datetime.strptime("08:30", "%H:%M").time()
 
-    if dt_time >= time_to_0900:
+    if dt_time >= time_to_0830:
         # データベース準備
         conn = sqlite3.connect(DATABASE_FILE)
         c = conn.cursor()
@@ -126,9 +126,9 @@ def delete_yesterday():
 def delete_daytime():
     # 現在の時刻を取得
     dt_time = datetime.datetime.now().time()
-    time_to_1800 = datetime.datetime.strptime("18:00", "%H:%M").time()
+    time_to_1730 = datetime.datetime.strptime("17:30", "%H:%M").time()
 
-    if dt_time >= time_to_1800:
+    if dt_time >= time_to_1730:
         # データベース準備
         conn = sqlite3.connect(DATABASE_FILE)
         c = conn.cursor()
@@ -153,13 +153,13 @@ delete_daytime()
 if __name__ == "__main__":
     scheduler = BackgroundScheduler()
 
-    # 毎日09:00にdelete_yesterday関数を実行するジョブを追加
-    trigger_09 = CronTrigger(hour=9, minute=0)
-    scheduler.add_job(delete_yesterday, trigger=trigger_09)
+    # 毎日08:30にdelete_yesterday関数を実行するジョブを追加
+    trigger_0830 = CronTrigger(hour=8, minute=30)
+    scheduler.add_job(delete_yesterday, trigger=trigger_0830)
 
-    # 毎日18:00にdelete_daytime関数を実行するジョブを追加
-    trigger_18 = CronTrigger(hour=18, minute=0)
-    scheduler.add_job(delete_daytime, trigger=trigger_18)
+    # 毎日17:30にdelete_daytime関数を実行するジョブを追加
+    trigger_1730 = CronTrigger(hour=17, minute=30)
+    scheduler.add_job(delete_daytime, trigger=trigger_1730)
 
     scheduler.start()
 
